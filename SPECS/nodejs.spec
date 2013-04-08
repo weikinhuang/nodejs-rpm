@@ -12,7 +12,6 @@ Group:				Development/Libraries
 Source:				http://nodejs.org/dist/%{version}/node-v%{version}-linux-%{node_arch}.tar.gz
 Source1:			nodejs.profile.d
 
-
 BuildRoot:			%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:			%{arch}
 
@@ -80,3 +79,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0755,root,root) %{_prefix}/bin/npm
 
 %changelog
+* Mon Apr  8 2013 Wei Kin Huang <wei@weikinhuang.com>
+- Initial version for 0.10.3
