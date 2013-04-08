@@ -56,6 +56,7 @@ fi
 
 # make rpm in a sandbox
 $CMD_PREFIX \
+	setarch $BUILD_ARCH \
 	rpmbuild -ba \
 	--define="_topdir ${WORKDIR}" \
 	--define="_tmppath ${WORKDIR}/tmp" \
