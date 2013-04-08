@@ -67,7 +67,7 @@ $CMD_PREFIX \
 	rpmbuild -ba \
 	--define="_topdir ${WORKDIR}" \
 	--define="_tmppath ${WORKDIR}/tmp" \
-	--define="x_ver $(extract_json "$WORKDIR/SOURCES/package.json" version)" \
+	--define="x_ver $(extract_json "$WORKDIR/SOURCES/package.json" version | sed 's/-//')" \
 	--define="x_desc $(extract_json "$WORKDIR/SOURCES/package.json" description)" \
 	--define="x_homepage ${MODULE_HOMEPAGE}" \
 	--define="x_node_ver $(node --version | sed 's/^v//')" \

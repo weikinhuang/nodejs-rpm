@@ -16,7 +16,7 @@ BuildRoot:			%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:			%{_arch}
 
 
-Requires:			node >= %{x_node_ver}
+Requires:			nodejs >= %{x_node_ver}
 
 
 %description
@@ -34,7 +34,13 @@ Requires:			node >= %{x_node_ver}
 rm -rf $RPM_BUILD_ROOT
 
 %__install -d "%{buildroot}%{_prefix}"
+
+# remove all directories named test
+find ./lib/node_modules/ -type d -name test | xargs -I {} rm -rf {}
+
+# copy everything over
 cp -pr ./* "%{buildroot}%{_prefix}"
+
 
 
 %clean
