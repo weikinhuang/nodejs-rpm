@@ -12,6 +12,7 @@ Group:				Development/Libraries
 Source:				http://nodejs.org/dist/%{version}/node-v%{version}-linux-%{node_arch}.tar.gz
 Source1:			nodejs.profile.d
 
+
 BuildRoot:			%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:			%{arch}
 
@@ -24,19 +25,6 @@ fast, scalable network applications. Node.js uses an event-driven, non-blocking
 I/O model that makes it lightweight and efficient, perfect for data-intensive
 real-time applications that run across distributed devices.
 
-
-
-%package npm
-Requires:			%{name} = %{version}
-Requires:			make
-Summary:			npm is the package manager for the Node JavaScript platform.
-License:			MIT
-URL:				https://npmjs.org/
-%description npm
-npm is the package manager for the Node JavaScript platform. It puts modules in
-place so that node can find them, and manages dependency conflicts intelligently.
-It is extremely configurable to support a wide variety of use cases. Most
-commonly, it is used to publish, discover, install, and develop node programs.
 
 %prep
 %setup -q -n node-v%{version}-linux-%{node_arch}
@@ -58,6 +46,9 @@ rm -f "%{buildroot}%{_prefix}/README.md"
 %__install -d "%{buildroot}/etc/profile.d"
 sed 's|\${_prefix}|%{_prefix}|' "%{SOURCE1}" > %{buildroot}/etc/profile.d/nodejs.sh
 
+# this is installed in a different package
+rm -rf "%{buildroot}%{_prefix}/bin/npm"
+rm -rf "%{buildroot}%{_prefix}/lib/node_modules/npm"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,11 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc
 %{_prefix}/share/man/man1/node.1.gz
 
-
-%files npm
-%defattr(-,root,root,-)
-%{_prefix}/lib/node_modules/npm/
-%attr(0755,root,root) %{_prefix}/bin/npm
 
 %changelog
 * Mon Apr  8 2013 Wei Kin Huang <wei@weikinhuang.com>
