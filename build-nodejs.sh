@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 if [[ "$1" == "--help" ]]; then
-	echo "Usage: $0 version node_arch arch"
+	echo "Usage: $0 version arch"
 	exit
 fi
 
